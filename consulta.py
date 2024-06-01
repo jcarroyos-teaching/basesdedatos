@@ -40,7 +40,13 @@ database = "u666555369_hipermedia"
 connection = create_connection(host, user, password, database)
 
 # Example query
-query = "SELECT * FROM autores"
+query = """
+SELECT a.nombre, a.telefono 
+FROM galeria g 
+JOIN autores a ON g.id_autor = a.id_autor 
+WHERE LOWER(g.descripcion) LIKE LOWER('%pintura%');
+"""
+
 results = execute_query(connection, query)
 if results:
     for row in results:
